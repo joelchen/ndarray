@@ -1322,7 +1322,7 @@ where
     /// use ndarray::Array;
     /// use ndarray::{arr3, Axis};
     ///
-    /// let a = Array::from_iter(0..28).into_shape((2, 7, 2)).unwrap();
+    /// let a = Array::from_iter(0..28).into_shape_with_order((2, 7, 2)).unwrap();
     /// let mut iter = a.axis_chunks_iter(Axis(1), 2);
     ///
     /// // first iteration yields a 2 × 2 × 2 view
@@ -1955,7 +1955,7 @@ where
     /// elements is accepted, but the source array or view must be in standard
     /// or column-major (Fortran) layout.
     ///
-    /// **Note** that `.into_shape()` "moves" elements differently depending on if the input array
+    /// **Note** that `.into_shape_with_order()` "moves" elements differently depending on if the input array
     /// is C-contig or F-contig, it follows the index order that corresponds to the memory order.
     /// Prefer to use `.to_shape()` or `.into_shape_with_order()`.
     ///
@@ -1969,7 +1969,7 @@ where
     /// use ndarray::{aview1, aview2};
     ///
     /// assert!(
-    ///     aview1(&[1., 2., 3., 4.]).into_shape((2, 2)).unwrap()
+    ///     aview1(&[1., 2., 3., 4.]).into_shape_with_order((2, 2)).unwrap()
     ///     == aview2(&[[1., 2.],
     ///                 [3., 4.]])
     /// );
@@ -2049,7 +2049,7 @@ where
         }
     }
 
-    /// *Note: Reshape is for `ArcArray` only. Use `.into_shape()` for
+    /// *Note: Reshape is for `ArcArray` only. Use `.into_shape_with_order()` for
     /// other arrays and array views.*
     ///
     /// Transform the array into `shape`; any shape with the same number of
@@ -2072,7 +2072,7 @@ where
     ///                 [3., 4.]])
     /// );
     /// ```
-    #[deprecated(note="Obsolete, use `to_shape` or `into_shape` instead.", since="0.15.2")]
+    #[deprecated(note="Obsolete, use `to_shape` or `into_shape_with_order` instead.", since="0.15.2")]
     pub fn reshape<E>(&self, shape: E) -> ArrayBase<S, E::Dim>
     where
         S: DataShared + DataOwned,
